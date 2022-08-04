@@ -47,6 +47,10 @@ app.controller('ctrl-home', function ($scope) {
             repo: 'InventoryMgtApp',
             //path: 'categories.json',
             message: 'Saved categories',
+            committer: {
+                name: 'Asma Rahim',
+                email: 'asmamano7@gmail.com'
+              },
             content: btoa(JSON.stringify($scope.Categories)),
             sha: file.data.sha
         })

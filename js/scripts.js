@@ -16,6 +16,7 @@ var map;
 //localStorage.removeItem('item');
 //localStorage.removeItem('category');
 
+// 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
 
 app.controller('ctrl-home', function ($scope) {
     $scope.items = []
@@ -25,7 +26,7 @@ app.controller('ctrl-home', function ($scope) {
 
     $scope.saveToServer = async function () {
         // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-        const octokit = new Octokit({ auth: `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` });
+        const octokit = new Octokit({ auth: `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` });
 
         // Save categories
         // Get Json file
@@ -64,7 +65,7 @@ app.controller('ctrl-home', function ($scope) {
     }
 
     $scope.getFromServer = async function () {
-        const octokit = new Octokit({ auth: `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` });
+        const octokit = new Octokit({ auth: `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` });
 
         let file_category = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
@@ -85,6 +86,7 @@ app.controller('ctrl-home', function ($scope) {
         localStorage.setItem('items', JSON.stringify($scope.items));
 
         alert('Get from the server.')
+
         //location.href = 'index.html';
     }
 

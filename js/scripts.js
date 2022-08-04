@@ -32,13 +32,13 @@ app.controller('ctrl-home', function ($scope) {
         let file = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'PATH',
+            path: 'categories.json',
         })
 
         let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'PATH',
+            path: 'categories.json',
             message: 'Saved categories',
             content: btoa(JSON.stringify($scope.Categories)),
             sha: file.data.sha
@@ -48,13 +48,13 @@ app.controller('ctrl-home', function ($scope) {
         let file_items = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/Items.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'PATH',
+            path: 'Items.json',
         })
 
         resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/Items.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'PATH',
+            path: 'Items.json',
             message: 'Saved Items',
             content: btoa(JSON.stringify($scope.items)),
             sha: file_items.data.sha
@@ -69,13 +69,13 @@ app.controller('ctrl-home', function ($scope) {
         let file_category = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'PATH',
+            path: 'categories.json',
         })
 
         let file_items = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/Items.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'PATH',
+            path: 'Items.json',
         })
 
         $scope.items = JSON.parse(atob(file_items.data.content));
@@ -84,6 +84,7 @@ app.controller('ctrl-home', function ($scope) {
         localStorage.setItem('categories', JSON.stringify($scope.Categories));
         localStorage.setItem('items', JSON.stringify($scope.items));
 
+        alert('Get from the server.')
         //location.href = 'index.html';
     }
 

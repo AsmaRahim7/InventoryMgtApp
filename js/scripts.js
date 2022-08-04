@@ -45,7 +45,7 @@ app.controller('ctrl-home', function ($scope) {
                 email: 'asmamano7@gmail.com'
               },
             content: btoa(JSON.stringify($scope.Categories)),
-            sha: file.data.sha
+            //sha: file.data.sha
         })
 
         //Save Items

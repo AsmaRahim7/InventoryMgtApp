@@ -29,7 +29,7 @@ app.controller('ctrl-home', function ($scope) {
         const octokit = new Octokit({ baseUrl: 'https://api.github.com' });
         
         octokit.auth({
-            type: 'basic',
+            type: 'token',
             username: 'asmamano7@gmail.com',
             password: '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'
         });
@@ -42,15 +42,21 @@ app.controller('ctrl-home', function ($scope) {
             path: 'categories.json',
         })
 
+        octokit.auth({
+            type: 'token',
+            username: 'asmamano7@gmail.com',
+            password: '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'
+        });
+        
         let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            //path: 'categories.json',
+            path: 'categories.json',
             message: 'Saved categories',
-            committer: {
-                name: 'Asma Rahim',
-                email: 'asmamano7@gmail.com'
-              },
+            //committer: {
+              //  name: 'Asma Rahim',
+                //email: 'asmamano7@gmail.com'
+              //},
             content: btoa(JSON.stringify($scope.Categories)),
             sha: file.data.sha
         })

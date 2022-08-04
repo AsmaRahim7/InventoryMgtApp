@@ -6,7 +6,7 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 
 var app = angular.module('inventory-app', []);
 var map;

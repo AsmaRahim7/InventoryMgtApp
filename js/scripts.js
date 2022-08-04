@@ -42,7 +42,7 @@ app.controller('ctrl-home', function ($scope) {
             path: 'categories.json',
         })
 
-        let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/blob/main/categories.json', {
+        let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json?ref=main', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
             //path: 'categories.json',

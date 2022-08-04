@@ -29,7 +29,7 @@ app.controller('ctrl-home', function ($scope) {
         const octokit = new Octokit();
         
         octokit.auth({
-            type: 'token',
+            type: 'basic',
             username: 'asmamano7@gmail.com',
             password: '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'
         });
@@ -43,9 +43,9 @@ app.controller('ctrl-home', function ($scope) {
         })
 
         let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
-            //owner: 'AsmaRahim7',
-            //repo: 'InventoryMgtApp',
-            //path: 'categories.json',
+            owner: 'AsmaRahim7',
+            repo: 'InventoryMgtApp',
+            path: 'categories.json',
             message: 'Saved categories',
             //committer: {
               //  name: 'Asma Rahim',

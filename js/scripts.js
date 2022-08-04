@@ -6,7 +6,7 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
+import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
 
 var app = angular.module('inventory-app', []);
 var map;
@@ -26,20 +26,14 @@ app.controller('ctrl-home', function ($scope) {
 
     $scope.saveToServer = async function () {
         // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-        const octokit = new Octokit({ baseUrl: 'https://api.github.com' });
-        
-        octokit.auth({
-            type: 'basic',
-            username: 'asmamano7@gmail.com',
-            password: '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'
-        });
+        const octokit = new Octokit({ auth: `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` });
 
         // Save categories
         // Get Json file
-        let file = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents', {
+        let file = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            //path: 'categories.json',
+            path: 'categories.json',
         })
 
         let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
@@ -119,4 +113,3 @@ app.controller('ctrl-home', function ($scope) {
         }
     }
 });
-

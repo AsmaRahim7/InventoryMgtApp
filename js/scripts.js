@@ -28,7 +28,7 @@ app.controller('ctrl-home', function ($scope) {
         // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
         const octokit = new Octokit({ baseUrl: 'https://api.github.com' });
         
-        octokit.authenticate({
+        octokit.auth({
             type: 'basic',
             username: 'asmamano7@gmail.com',
             password: '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'

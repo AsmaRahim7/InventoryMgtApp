@@ -35,13 +35,6 @@ app.controller('ctrl-home', function ($scope) {
         });
 
         // Save categories
-        // Get Json file
-       // let file = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
-         //   owner: 'AsmaRahim7',
-           // repo: 'InventoryMgtApp',
-            //path: 'categories.json',
-        //})
-
         let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',

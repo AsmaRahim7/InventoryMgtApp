@@ -61,7 +61,7 @@ app.controller('ctrl-home', function ($scope) {
             path: 'Items.json',
             message: 'Saved Items',
             content: btoa(JSON.stringify($scope.items)),
-            sha: file_items.data.sha
+            //sha: file_items.data.sha
         })
 
         alert('Your data has been saved to server.');

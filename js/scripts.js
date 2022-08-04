@@ -45,7 +45,7 @@ app.controller('ctrl-home', function ($scope) {
         let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
             owner: 'AsmaRahim7',
             repo: 'InventoryMgtApp',
-            path: 'categories.json',
+            //path: 'categories.json',
             message: 'Saved categories',
             content: btoa(JSON.stringify($scope.Categories)),
             sha: file.data.sha

@@ -26,7 +26,13 @@ app.controller('ctrl-home', function ($scope) {
 
     $scope.saveToServer = async function () {
         // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-        const octokit = new Octokit({ baseUrl: 'https://api.github.com', auth: `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` });
+        const octokit = new Octokit({ baseUrl: 'https://api.github.com' });
+        
+        octokit.authenticate({
+            type: 'basic',
+            username: 'asmamano7@gmail.com',
+            password: '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'
+        });
 
         // Save categories
         // Get Json file

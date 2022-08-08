@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script type="module">
+        import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+
+        // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+        const octokit = new Octokit({
+            auth: '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'
+        });
+
+        //octokit.auth({
+        //    username: 'AsmaRahim7',
+        //    password: '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'
+        //});
+
+        // Get Json file
+        let file = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
+            owner: 'AsmaRahim7',
+            repo: 'InventoryMgtApp',
+            path: 'PATH',
+        })
+
+
+        let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
+            owner: 'AsmaRahim7',
+            repo: 'InventoryMgtApp',
+            path: 'categories.json',
+            ref: 'master',
+            message: 'my commit message',
+            committer: {
+                name: 'AsmaRahim7',
+                email: 'asmamano7@gmail.com'
+            },
+            content: btoa(JSON.stringify({ Name: 'Imran', LastName: 'Mana' })),
+            sha: file.data.sha
+        })
+
+        alert('Done.');
+    </script>
+</body>
+</html>

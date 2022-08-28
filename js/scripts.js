@@ -6,102 +6,52 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-
 var app = angular.module('inventory-app', []);
-var map;
-
-//localStorage.removeItem('items');
-//localStorage.removeItem('categories');
-//localStorage.removeItem('item');
-//localStorage.removeItem('category');
-
-// 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
 
 app.controller('ctrl-home', function ($scope) {
     $scope.items = []
     $scope.filteredItems = [];
     $scope.Categories = []
     $scope.CatName = '';
+    $scope.loading = false;
 
-    $scope.saveToServer = async function () {
-        // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-        const octokit = new Octokit();
-        
-        octokit.auth({
-            type: 'basic',
-            username: 'asmamano7@gmail.com',
-            password: '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'
+    LoadCategoryList()
+    LoadItemList()
+
+    function LoadCategoryList() {
+        var db = firebase.database().ref('categories');
+        $scope.loading = true;
+        db.on('value', function (categories) {
+            //alert(categories);
+            $scope.Categories = []
+            categories.forEach(function (data) {
+                $scope.Categories.push({ ID: data.key, Name: data.val().Name })
+            });
+            $scope.loading = false;
+
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
         });
-
-        // Save categories
-        let resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
-            owner: 'AsmaRahim7',
-            repo: 'InventoryMgtApp',
-            path: 'main',
-            message: 'Saved categories',
-            committer: {
-                name: 'Asma Rahim',
-                email: 'asmamano7@gmail.com'
-              },
-            content: btoa(JSON.stringify($scope.Categories)),
-            //sha: file.data.sha
-        })
-
-        //Save Items
-        let file_items = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/Items.json', {
-            owner: 'AsmaRahim7',
-            repo: 'InventoryMgtApp',
-            path: 'Items.json',
-        })
-
-        resp = await octokit.request('PUT /repos/AsmaRahim7/InventoryMgtApp/contents/Items.json', {
-            owner: 'AsmaRahim7',
-            repo: 'InventoryMgtApp',
-            path: 'Items.json',
-            message: 'Saved Items',
-            content: btoa(JSON.stringify($scope.items)),
-            //sha: file_items.data.sha
-        })
-
-        alert('Your data has been saved to server.');
     }
+    function LoadItemList() {
+        var db = firebase.database().ref('items');
+        $scope.loading = true;
+        db.on('value', function (items) {
+            //alert(categories);
+            $scope.items = []
+            items.forEach(function (data) {
+                if (data.val().isDeleted === false) {
+                    $scope.items.push({ ID: data.key, Name: data.val().Name, CatName: data.val().CatName, Quantity: data.val().Quantity, isDeleted: data.val().isDeleted })
+                }
+            });
+            $scope.filteredItems = $scope.items;
+            $scope.loading = false;
 
-    $scope.getFromServer = async function () {
-        const octokit = new Octokit({ auth: `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` });
-
-        let file_category = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/categories.json', {
-            owner: 'AsmaRahim7',
-            repo: 'InventoryMgtApp',
-            path: 'categories.json',
-        })
-
-        let file_items = await octokit.request('GET /repos/AsmaRahim7/InventoryMgtApp/contents/Items.json', {
-            owner: 'AsmaRahim7',
-            repo: 'InventoryMgtApp',
-            path: 'Items.json',
-        })
-
-        $scope.items = JSON.parse(atob(file_items.data.content));
-        $scope.Categories = JSON.parse(atob(file_category.data.content));
-
-        localStorage.setItem('categories', JSON.stringify($scope.Categories));
-        localStorage.setItem('items', JSON.stringify($scope.items));
-
-        alert('Get from the server.')
-
-        //location.href = 'index.html';
-    }
-
-    //$scope.getFromServer();
-
-    if (localStorage.getItem('items') !== null && localStorage.getItem('items') !== undefined) {
-        $scope.items = JSON.parse(localStorage.getItem('items'));
-        $scope.filteredItems = JSON.parse(localStorage.getItem('items'));
-    }
-
-    if (localStorage.getItem('categories') !== null && localStorage.getItem('categories') !== undefined) {
-        $scope.Categories = JSON.parse(localStorage.getItem('categories'));
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        });
     }
 
     $scope.sortByCategory = function () {
@@ -116,3 +66,4 @@ app.controller('ctrl-home', function ($scope) {
         }
     }
 });
+

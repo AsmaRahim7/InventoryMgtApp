@@ -22,16 +22,6 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="category.html">Category</a></li>
                     <li class="nav-item"><a class="nav-link" href="items.html">Items</a></li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Backup
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" ng-click="saveToServer()">Save to Server</a></li>
-                            <li><a class="dropdown-item" href="#" ng-click="getFromServer()">Load from Server</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -72,20 +62,24 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="spinner-border text-primary" role="status" ng-if="loading === true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div id="divCategories" style="display:none"></div>
-    <div id="divItems" style="display:none"></div>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Angular JS -->
     <script src="js/angular.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+
+    <script src="js/firebase.init.js"></script>
+
 
     <!-- Core theme JS -->
     <script type="module" src="js/scripts.js"></script>

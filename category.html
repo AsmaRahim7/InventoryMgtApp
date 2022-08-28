@@ -36,7 +36,7 @@
             <h1>All Category</h1>
 
             <a href="manage_category.html" class="btn btn-primary mt-2 mb-2">Add Category</a>
-
+            
             <div class="row">
                 <div class="col-md-12">
                     <input type="text" class="form-control" placeholder="Search...." ng-model="search_cat" />
@@ -64,6 +64,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="spinner-border text-primary" role="status" ng-if="loading === true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -73,6 +77,10 @@
 
     <!-- Angular JS -->
     <script src="js/angular.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+
+    <script src="js/firebase.init.js"></script>
 
     <!-- Core theme JS-->
     <script src="js/category.js"></script>
